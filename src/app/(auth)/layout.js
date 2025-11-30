@@ -1,4 +1,5 @@
 "use client";
+
 import Logo from "@/components/Logo";
 import { HOME_ROUTE } from "@/constants/routes";
 import { useRouter } from "next/navigation";

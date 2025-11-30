@@ -11,7 +11,6 @@ const Hero = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center md:justify-between">
-          {/* Content  */}
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
               New Amazing Products

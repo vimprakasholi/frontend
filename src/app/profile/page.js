@@ -52,7 +52,7 @@ const ProfilePage = () => {
       toast.success("Profile updated successfully", { autoClose: 1500 });
       dispatch(resetSuccess());
     }
-  }, [error, success]);
+  }, [error, success, dispatch]);
 
   return (
     <section className="dark:bg-gray-800">

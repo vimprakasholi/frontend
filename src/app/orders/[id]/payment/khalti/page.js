@@ -16,7 +16,10 @@ const KhaltiPaymentPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    confirmPayment(params.id, { status })
+    const id = params.id;
+    const paymentStatus = status;
+
+    confirmPayment(id, { status: paymentStatus })
       .then(() =>
         toast.success("Payment success", {
           autoClose: 2500,

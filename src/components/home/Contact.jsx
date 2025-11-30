@@ -78,7 +78,6 @@ const Contact = () => {
                   placeholder="Subject"
                   id="message"
                   required
-                  defaultValue={""}
                 />
               </div>
               <input
