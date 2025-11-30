@@ -5,7 +5,7 @@ import { FaCartPlus } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-const AddToCart = ({ product }) => {
+const AddToCart = ({ product, label }) => {
   const dispatch = useDispatch();
 
   function addProductToCart() {
@@ -18,9 +18,9 @@ const AddToCart = ({ product }) => {
   return (
     <button
       onClick={addProductToCart}
-      className="text-primary dark:text-secondary cursor-pointer"
+      className="bg-primary text-white dark:text-secondary cursor-pointer flex items-center gap-2 border border-primary px-4 rounded-md"
     >
-      <FaCartPlus />
+      <span>{label ? label : ""}</span> <FaCartPlus />
     </button>
   );
 };
