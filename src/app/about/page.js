@@ -1,3 +1,10 @@
+import Image from "next/image";
+import aboutImage from "@/assets/images/about/main.avif";
+import memOne from "@/assets/images/about/mem-one.avif";
+import memTwo from "@/assets/images/about/mem-two.avif";
+import memThree from "@/assets/images/about/mem-three.avif";
+import memFour from "@/assets/images/about/mem-four.avif";
+
 export const metadata = {
   title: "About",
 };
@@ -13,9 +20,9 @@ const About = () => {
                 About Our Company
               </h1>
               <p className="text-lg mb-8 opacity-90">
-                We&apos;re a team of passionate individuals dedicated to delivering
-                exceptional solutions for our clients worldwide. Our mission is
-                to simplify complexity and drive innovation.
+                We&apos;re a team of passionate individuals dedicated to
+                delivering exceptional solutions for our clients worldwide. Our
+                mission is to simplify complexity and drive innovation.
               </p>
               <a
                 href="#contact"
@@ -49,17 +56,20 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* Our Story */}
       <section className="py-16 dark:bg-gray-800 dark:text-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">Our Story</h2>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+              Our Story
+            </h2>
             <div className="h-1 w-20 bg-secondary mx-auto" />
           </div>
           <div className="md:flex items-center">
             <div className="md:w-1/2 mb-10 md:mb-0">
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+              <Image
+                width={500}
+                height={500}
+                src={aboutImage}
                 alt="Our Team"
                 className="rounded-lg shadow-md"
               />
@@ -87,7 +97,6 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* Team Section */}
       <section className="py-16 bg-gray-100 dark:bg-gray-700">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -101,10 +110,11 @@ const About = () => {
             <div className="h-1 w-20 bg-secondary mx-auto mt-4" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Team Member 1 */}
             <div className="bg-white dark:bg-gray-800  rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-              <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
+              <Image
+                width={500}
+                height={500}
+                src={memOne}
                 alt="Team Member"
                 className="w-full h-60 object-cover"
               />
@@ -138,10 +148,11 @@ const About = () => {
                 </div>
               </div>
             </div>
-            {/* Team Member 2 */}
             <div className="bg-white dark:bg-gray-800  rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-              <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
+              <Image
+                width={500}
+                height={500}
+                src={memTwo}
                 alt="Team Member"
                 className="w-full h-60 object-cover"
               />
@@ -175,10 +186,11 @@ const About = () => {
                 </div>
               </div>
             </div>
-            {/* Team Member 3 */}
             <div className="bg-white dark:bg-gray-800  rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-              <img
-                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
+              <Image
+                width={500}
+                height={500}
+                src={memThree}
                 alt="Team Member"
                 className="w-full h-60 object-cover"
               />
@@ -212,10 +224,11 @@ const About = () => {
                 </div>
               </div>
             </div>
-            {/* Team Member 4 */}
             <div className="bg-white dark:bg-gray-800  rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-              <img
-                src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
+              <Image
+                width={500}
+                height={500}
+                src={memFour}
                 alt="Team Member"
                 className="w-full h-60 object-cover"
               />

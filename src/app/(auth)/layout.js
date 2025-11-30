@@ -28,8 +28,8 @@ const AuthLayout = ({ children }) => {
                     Welcome!
                   </h1>
                   <p className="text-white text-md font-medium">
-                    Great news! Your favourite item is back in stock. Don&apos;t miss
-                    out, order now before it sells out again!
+                    Great news! Your favourite item is back in stock. Don&apos;t
+                    miss out, order now before it sells out again!
                   </p>
                 </div>
               </div>
