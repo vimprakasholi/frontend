@@ -25,7 +25,7 @@ const Contact = () => {
               Magnam, cum!
             </p>
           </div>
-          <div className="bg-white rounded-2xl px-8 py-10 lg:w-3/4 mx-auto">
+          <div className="bg-white dark:bg-gray-800 dark:text-gray-100 rounded-2xl px-8 py-10 lg:w-3/4 mx-auto">
             <h3 className="text-3xl font-bold text-center mb-4">
               Contact Form
             </h3>

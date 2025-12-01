@@ -19,6 +19,8 @@ import {
   HiMiniArrowsUpDown,
 } from "react-icons/hi2";
 import Pagination from "./Pagination";
+import { ADMIN } from "@/constants/roles";
+import { toast } from "react-toastify";
 
 const columns = [
   {
@@ -67,8 +69,24 @@ const ProductsTable = () => {
   const [sortOrder, setSortOrder] = useState(-1);
   const [page, setPage] = useState(1);
 
+  const { user } = useSelector((state) => state.auth);
   const { refresh } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+
+  async function getAllProducts(query) {
+    try {
+      const response = user.roles.includes(ADMIN)
+        ? await getProducts(query)
+        : await getProducts({ ...query, createdBy: user._id });
+
+      setProducts(response?.data);
+    } catch (error) {
+      toast.error(error.response?.data, { autoClose: 1500 });
+    } finally {
+      setLoading(false);
+      dispatch(refreshList(false));
+    }
+  }
 
   useEffect(() => {
     const query = {};
@@ -78,14 +96,7 @@ const ProductsTable = () => {
     query.limit = PAGE_LIMIT;
     query.offset = (page - 1) * PAGE_LIMIT;
 
-    getProducts(query)
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .finally(() => {
-        setLoading(false);
-        dispatch(refreshList(false));
-      });
+    getAllProducts(query);
   }, [refresh, dispatch, sortBy, sortOrder, page]);
 
   return (

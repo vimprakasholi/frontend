@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@/components/Button";
 import { EMAIL_REGEX } from "@/constants/regex";
-import Image from "next/image";
-import { FaUser } from "react-icons/fa6";
 import { updateUserProfile } from "@/redux/auth/authActions";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -56,7 +54,7 @@ const ProfilePage = () => {
 
   return (
     <section className="dark:bg-gray-800">
-      <div className="container mx-auto px-4 py-10 max-w-5xl">
+      <div className="container mx-auto px-4 max-w-5xl">
         <h1 className="text-3xl mb-5 font-semibold text-gray-800 dark:text-white">
           Your Profile
         </h1>

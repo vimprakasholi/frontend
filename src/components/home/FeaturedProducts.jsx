@@ -7,7 +7,7 @@ import { FaImage, FaStar } from "react-icons/fa6";
 
 const Card = ({ product }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
       <div className="relative">
         {product.imageUrls.length > 0 ? (
           <Image
@@ -54,13 +54,13 @@ const FeaturedProducts = async () => {
   const products = response.data;
 
   return (
-    <section id="products" className="py-12 md:py-28 bg-slate-200">
+    <section id="products" className="py-12 md:py-28 bg-slate-200 dark:bg-slate-700 dark:text-white">
       <div className="container mx-auto px-4">
         <div className="mb-10">
           <h2 className="text-3xl font-bold text-center mb-4">
             Featured Products
           </h2>
-          <p className="text-gray-600 text-center">
+          <p className="text-gray-600 dark:text-gray-300 text-center">
             Check out the latest and the best products available in the market.
           </p>
         </div>

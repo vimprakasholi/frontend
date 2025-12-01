@@ -1,7 +1,12 @@
+import formatParams from "@/helpers/formatParams";
 import api from "./api";
 
 async function getOrders() {
   return await api.get("/api/orders");
+}
+
+async function getOrdersOfMerchant() {
+  return await api.get("/api/orders/merchant");
 }
 
 async function createOrder(data) {
@@ -9,7 +14,8 @@ async function createOrder(data) {
 }
 
 async function getOrdersByUser(status) {
-  return await api.get(`/api/orders/user?status=${status}`);
+  const query = formatParams({ status });
+  return await api.get(`/api/orders/user?${query}`);
 }
 
 async function deleteOrder(id) {
@@ -39,6 +45,7 @@ export {
   deleteOrder,
   updateOrder,
   payViaKhalti,
+  getOrdersOfMerchant,
   payViaStripe,
   confirmPayment,
 };

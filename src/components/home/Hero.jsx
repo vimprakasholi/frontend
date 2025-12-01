@@ -36,8 +36,8 @@ const Hero = () => {
           </div>
           <div className="md:w-1/2">
             <Image
-              height={300}
-              width={300}
+              height={400}
+              width={400}
               className="max-w-full h-auto rounded-xl shadow-xl lg:w-3/4 float-right"
               src={heroImg}
               alt="Hero Image"

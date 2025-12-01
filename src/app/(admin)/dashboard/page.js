@@ -4,25 +4,40 @@ import { useEffect, useState } from "react";
 import Card from "./_components/Card";
 import { FaCertificate, FaRegClock, FaVanShuttle } from "react-icons/fa6";
 import { FaRegCheckCircle } from "react-icons/fa";
-import { getOrders } from "@/api/orders";
+import { getOrders, getOrdersByUser, getOrdersOfMerchant } from "@/api/orders";
+import { toast } from "react-toastify";
 import {
   ORDER_STATUS_CONFIRMED,
   ORDER_STATUS_DELIVERED,
   ORDER_STATUS_PENDING,
   ORDER_STATUS_SHIPPED,
 } from "@/constants/orderStatus";
-import { toast } from "react-toastify";
+import { ADMIN, MERCHANT } from "@/constants/roles";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
 
+  const { user } = useSelector((state) => state.auth);
+
+  async function getAllOrders() {
+    try {
+      const response = user.roles.includes(ADMIN)
+        ? await getOrders()
+        : user.roles.includes(MERCHANT)
+        ? await getOrdersOfMerchant()
+        : await getOrdersByUser();
+
+      setOrders(response.data);
+    } catch (error) {
+      toast.error(error?.response?.data, { autoClose: 1500 });
+    }
+  }
+
   useEffect(() => {
-    getOrders()
-      .then((response) => {
-        setOrders(response.data);
-      })
-      .catch((error) => toast.error(error.message, { autoClose: 1500 }));
+    getAllOrders();
   }, []);
+
   return (
     <div className="px-4 mx-auto max-w-screen-2xl">
       <h2 className="text-gray-800 dark:text-white mb-5 text-2xl font-semibold">

@@ -1,19 +1,10 @@
 "use client";
 
-import { FaPlus } from "react-icons/fa6";
-import { HiOutlineUpload } from "react-icons/hi";
 import { format } from "date-fns";
 import { FaCog } from "react-icons/fa";
 import { RxDotFilled } from "react-icons/rx";
-import Link from "next/link";
-import { ORDER_MANAGEMENT_ROUTE } from "@/constants/routes";
 import { useEffect, useState } from "react";
-import { getOrders } from "@/api/orders";
-import {
-  HiArrowSmallDown,
-  HiArrowSmallUp,
-  HiMiniArrowsUpDown,
-} from "react-icons/hi2";
+import { getOrders, getOrdersOfMerchant } from "@/api/orders";
 import {
   ORDER_STATUS_CONFIRMED,
   ORDER_STATUS_DELIVERED,
@@ -22,57 +13,60 @@ import {
 } from "@/constants/orderStatus";
 import Action from "./Action";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { ADMIN } from "@/constants/roles";
 
 const columns = [
   {
     label: "S.No.",
     key: "id",
-    sortable: false,
   },
   {
     label: "Order Number",
     key: "orderNumber",
-    sortable: true,
   },
   {
     label: "OrderBy",
     key: "user",
-    sortable: true,
   },
   {
     label: "Order Items",
     key: "orderItems",
-    sortable: true,
   },
   {
     label: "Total Price",
     key: "totalPrice",
-    sortable: true,
   },
   {
     label: "status",
     key: "status",
-    sortable: true,
   },
   {
     label: "Created At",
     key: "createdAt",
-    sortable: true,
   },
 ];
 
 const OrdersTable = () => {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [sortBy, setSortBy] = useState("createdAt");
-  const [sortOrder, setSortOrder] = useState(-1);
+  const { user } = useSelector((state) => state.auth);
+
+  async function getAllOrders() {
+    try {
+      const response = user.roles.includes(ADMIN)
+        ? await getOrders()
+        : await getOrdersOfMerchant();
+      console.log(response.data);
+
+      setOrders(response.data);
+    } catch (error) {
+      toast.error(error.response.data, { autoClose: 1500 });
+    }
+  }
 
   useEffect(() => {
-    getOrders()
-      .then((response) => {
-        setOrders(response.data);
-      })
-      .catch((error) => toast.error(error.message, { autoClose: 1500 }));
+    getAllOrders();
   }, []);
 
   return (
@@ -83,30 +77,6 @@ const OrdersTable = () => {
             <span className="text-gray-500">All Orders: </span>
             <span className="dark:text-white">{orders.length}</span>
           </h5>
-          <h5>
-            <span className="text-gray-500">Total sales: </span>
-            <span className="dark:text-white">
-              Rs.
-              {orders?.reduce((acc, order) => acc + order.totalPrice, 0) / 1000}
-              K
-            </span>
-          </h5>
-        </div>
-        <div className="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
-          <Link
-            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary/80 hover:bg-primary"
-            href={`${ORDER_MANAGEMENT_ROUTE}`}
-          >
-            <FaPlus className="h-3.5 w-3.5 mr-2" />
-            Add new order
-          </Link>
-          <button
-            type="button"
-            className="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-          >
-            <HiOutlineUpload className="w-4 h-4 mr-2" />
-            Export
-          </button>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -118,26 +88,8 @@ const OrdersTable = () => {
                   key={index}
                   scope="col"
                   className="px-4 py-3 cursor-pointer"
-                  onClick={() => {
-                    if (!column.sortable) return;
-                    setSortBy(column.key);
-                    setSortOrder(sortOrder == 1 ? -1 : 1);
-                  }}
                 >
-                  <div className="flex items-center gap-2">
-                    {column.label}
-                    {column.sortable ? (
-                      column.key == sortBy ? (
-                        sortOrder == 1 ? (
-                          <HiArrowSmallUp />
-                        ) : (
-                          <HiArrowSmallDown />
-                        )
-                      ) : (
-                        <HiMiniArrowsUpDown />
-                      )
-                    ) : null}
-                  </div>
+                  <div className="flex items-center gap-2">{column.label}</div>
                 </th>
               ))}
               <th
@@ -175,9 +127,8 @@ const OrdersTable = () => {
                         <li className="flex items-center" key={index}>
                           <RxDotFilled />
                           <span className="text-md font-medium px-1">
-                            {item.product.name}
+                            {item.name}
                           </span>
-                          ({item.quantity})
                         </li>
                       ))}
                     </ul>

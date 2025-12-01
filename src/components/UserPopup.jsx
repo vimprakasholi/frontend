@@ -33,7 +33,7 @@ const UserPopup = ({ user, setShowPopup }) => {
           href={DASHBOARD_ROUTE}
           className="px-4 py-1 rounded-md bg-gray-100 dark:bg-gray-700 w-full text-left hover:bg-primary dark:hover:bg-primary hover:text-white"
         >
-          Admin Panel
+          Dashboard
         </Link>
         <Link
           href={PROFILE_ROUTE}
