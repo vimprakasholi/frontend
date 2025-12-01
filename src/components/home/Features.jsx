@@ -9,7 +9,7 @@ const Features = () => {
           <h2 className="text-3xl font-bold text-center mb-4">
             Why Choose ShopNest?
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 dark:text-gray-200 text-center">
+          <p className="text-gray-600 dark:text-gray-200 text-center">
             We provide the best shopping experiences with our premium quality
             products.
           </p>
